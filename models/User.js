@@ -41,16 +41,13 @@ userSchema.pre("save", function (next) {
   // 비밀번호를 생성하거나 바꿀떄
   if (user.isModified("password")) {
     // 비밀번호를 암호화 시킨다.
-    bcrypt.genSalt(saltRounds, function (err, salt) {
+    bcrypt.hash(user.password, saltRounds, function (err, hash) {
+      // Store hash in your password DB.
       if (err) return next(err);
 
-      bcrypt.hash(user.password, salt, function (err, hash) {
-        if (err) return next(err);
-
-        // 유저 passowrd 를 hash 로 교체
-        user.password = hash;
-        next();
-      });
+      // 유저 passowrd 를 hash 로 교체
+      user.password = hash;
+      next();
     });
   } else {
     next();
