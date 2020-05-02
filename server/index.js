@@ -28,6 +28,10 @@ mongoose
 
 app.get("/", (req, res) => res.send("Hello Express!"));
 
+app.get("/api/hello", (req, res) =>
+  res.status(200).json({ success: true, message: "hello" })
+);
+
 app.post("/api/users/register", (req, res) => {
   // 회원가입시 필요한 정보를 client 에서 가져오면
   // 데이터베이스에 저장
