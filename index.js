@@ -5,6 +5,7 @@ const bodyParser = require("body-parser");
 const cookieParser = require("cookie-parser");
 const config = require("./config/key");
 const { User } = require("./models/User");
+const { auth } = require("./middleware/auth");
 
 // application/x-www-form-urlencoded
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -27,7 +28,7 @@ mongoose
 
 app.get("/", (req, res) => res.send("Hello Express!"));
 
-app.post("/register", (req, res) => {
+app.post("/api/users/register", (req, res) => {
   // 회원가입시 필요한 정보를 client 에서 가져오면
   // 데이터베이스에 저장
   const user = new User(req.body);
@@ -39,7 +40,7 @@ app.post("/register", (req, res) => {
   });
 });
 
-app.post("/login", (req, res) => {
+app.post("/api/users/login", (req, res) => {
   // 요청된 이메일을 데이터베이스에 있는지 찾기
 
   User.findOne({ email: req.body.email }, (err, user) => {
@@ -70,6 +71,14 @@ app.post("/login", (req, res) => {
         });
       }
     });
+  });
+});
+
+app.get("/api/users/auth", auth, (req, res) => {
+  // 미들웨어를 통과했다는 것은 Authentication 이 true 라는 말
+  res.status(200).json({
+    user: req.user,
+    isAuth: true,
   });
 });
 
