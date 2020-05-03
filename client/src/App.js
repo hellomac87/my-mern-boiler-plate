@@ -1,19 +1,20 @@
 import React from "react";
-import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
-
-import LandingPage from "./components/views/LandingPage";
-import LoginPage from "./components/views/LoginPage";
-import RegisterPage from "./components/views/RegisterPage";
+import { Switch, Route } from "react-router-dom";
+import { history } from "store/configureStore";
+import { ConnectedRouter } from "connected-react-router";
+import LandingPage from "components/views/LandingPage";
+import LoginPage from "components/views/LoginPage";
+import RegisterPage from "components/views/RegisterPage";
 
 function App() {
   return (
-    <Router>
+    <ConnectedRouter history={history}>
       <Switch>
         <Route exact path="/" component={LandingPage} />
         <Route exact path="/login" component={LoginPage} />
         <Route exact path="/register" component={RegisterPage} />
       </Switch>
-    </Router>
+    </ConnectedRouter>
   );
 }
 
