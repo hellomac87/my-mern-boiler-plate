@@ -1,6 +1,18 @@
 import React from "react";
+import axios from "axios";
+import { useHistory } from "react-router-dom";
 
 const LandingPage = () => {
+  const history = useHistory();
+  const onClickHandler = () => {
+    axios.get(`/api/users/logout`).then((res) => {
+      if (res.data.success) {
+        history.push("/login");
+      } else {
+        alert("로그아웃 실패");
+      }
+    });
+  };
   return (
     <div
       style={{
@@ -13,7 +25,9 @@ const LandingPage = () => {
     >
       <h2>Landing Page</h2>
 
-      <button>logout</button>
+      <button type="button" onClick={onClickHandler}>
+        logout
+      </button>
     </div>
   );
 };
