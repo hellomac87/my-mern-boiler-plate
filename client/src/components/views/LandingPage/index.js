@@ -1,12 +1,6 @@
-import React, { useEffect } from "react";
-import axios from "axios";
+import React from "react";
 
 const LandingPage = () => {
-  useEffect(() => {
-    axios.get("/api/hello").then((res) => {
-      console.log(res);
-    });
-  }, []);
   return (
     <div
       style={{
@@ -18,6 +12,8 @@ const LandingPage = () => {
       }}
     >
       <h2>Landing Page</h2>
+
+      <button>logout</button>
     </div>
   );
 };
