@@ -43,7 +43,7 @@ function* registerUserSaga(action) {
   try {
     yield put({
       type: REGISTER_USER_SUCCESS,
-      register: data,
+      data,
     });
 
     yield put(push("/login"));
@@ -86,16 +86,16 @@ export const userReducer = handleActions(
         draft.fetching = false;
       }),
     /** REGISTER */
-    [LOGIN_USER_REQUEST]: (state, action) =>
+    [REGISTER_USER_REQUEST]: (state, action) =>
       produce(state, (draft) => {
         draft.fetching = true;
       }),
-    [LOGIN_USER_SUCCESS]: (state, action) =>
+    [REGISTER_USER_SUCCESS]: (state, action) =>
       produce(state, (draft) => {
         draft.fetching = false;
-        draft.register = action.data.register;
+        draft.register = action.data;
       }),
-    [LOGIN_USER_FAILURE]: (state, action) =>
+    [REGISTER_USER_FAILURE]: (state, action) =>
       produce(state, (draft) => {
         draft.fetching = false;
       }),
