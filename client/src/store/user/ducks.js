@@ -59,7 +59,9 @@ function* registerUserSaga(action) {
   }
 }
 
-function* authUserSaga(_) {
+function* authUserSaga(action) {
+  console.log(action);
+  return;
   try {
     const { data } = yield axios.get("/api/users/auth");
 

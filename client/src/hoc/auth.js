@@ -13,6 +13,7 @@ export default function (SpecificComponent, option, adminRoute = null) {
     const dispatch = useDispatch();
     const history = useHistory();
     useEffect(() => {
+      dispatch(authUser(true));
       //To know my current status, send Auth request
       axios.get("/api/users/auth").then((response) => {
         //Not Loggined in Status
